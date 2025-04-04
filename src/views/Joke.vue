@@ -1,5 +1,5 @@
 <script setup>
-import api from '../components/api.vue'
+import api from '../components/fetchJoke.vue'
 </script>
 
 <template>

@@ -1,5 +1,5 @@
 <template>
-  <div class="about">
+  <div class="Likes">
     <h1>Bekijk je likes</h1>
     <div v-for="like in likes" :key="like.id">
       <p>{{ like }}</p>
@@ -28,7 +28,7 @@ export default {
 </script>
 
 <style>
-  .about {
+  .Likes {
     text-align: center;
   }
   
