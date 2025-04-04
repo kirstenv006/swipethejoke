@@ -17,8 +17,6 @@
 
 <script>
 
-import { useStore } from 'vuex';
-
 export default {
   data() {
     return {
@@ -27,16 +25,19 @@ export default {
       startX: 0,
       currentX: 0,
       lastSwipeChoice: "",
-      store: null
     };
   },
   mounted() {
     this.fetchJoke();
-    this.store = useStore();
   },
   methods: {
     dragStart(event) {
       this.startX = event.clientX; // Beginpositie opslaan
+    },
+    saveToLocalStorage(joke) {
+      const storedJokes = JSON.parse(localStorage.getItem('jokes')) || [];
+      storedJokes.push(joke);
+      localStorage.setItem('jokes', JSON.stringify(storedJokes));
     },
     dragEnd(event) {
 
@@ -45,12 +46,12 @@ export default {
       
       // Swipe naar rechts
       if (this.currentX > this.startX) {
+        this.saveToLocalStorage(this.joke);  
         this.fetchJoke();
       } 
       
       // Swipe naar links
       if (this.currentX < this.startX) {
-        this.store.dispatch('addItem', this.joke);
         this.fetchJoke();
       }
     },

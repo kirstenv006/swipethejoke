@@ -9,18 +9,18 @@
 
 <script>
 
-import { useStore } from 'vuex';
-
 export default {
   data() {
     return {
-      store: null,
       likes: []
     }
   },
   mounted() {
-    this.store = useStore();
-    this.likes = this.store.getters.allItems;
+    // this.likes = this.store.getters.allItems;
+
+    const grapjes = JSON.parse(localStorage.getItem("jokes")) || [];
+    this.likes = grapjes;
+
   }
 }
 
