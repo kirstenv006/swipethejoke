@@ -1,30 +1,31 @@
 <template>
   <div class="Likes">
     <h1>Bekijk je likes</h1>
-    <div v-for="like in likes" :key="like.id">
+    <div v-for="(like, index) in likes" :key="index">
       <p>{{ like }}</p>
-  </div>
+      <button @click="verwijderLike(index)">Delete like</button>
+    </div>
   </div>
 </template>
 
 <script>
-
-import { useStore } from 'vuex';
-
 export default {
   data() {
     return {
-      store: null,
       likes: []
     }
   },
   mounted() {
-    this.store = useStore();
-    this.likes = this.store.getters.allItems;
+    const grapjes = JSON.parse(localStorage.getItem("jokes")) || [];
+    this.likes = grapjes;
+  },
+  methods: {
+    verwijderLike(index) {
+      this.likes.splice(index, 1); 
+      localStorage.setItem("jokes", JSON.stringify(this.likes)); 
+    }
   }
 }
-
-
 </script>
 
 <style>
@@ -36,8 +37,8 @@ export default {
     font-size: 15px;
   }
 
- h1{
+  h1 {
     width: 100%; 
     margin-bottom: 2rem;
- }
+  }
 </style>
