@@ -1,7 +1,7 @@
 <template>
   <div class="Likes">
     <h1>Watch your Likes</h1>
-    <p>Here you will see your liked jokes.</p>
+    <p>Here you can see your liked jokes.</p>
     <div class="cards-container">
       <div class="jokestijlklein" v-for="(like, index) in likes" :key="index">
         <p>{{ like }}</p>
@@ -94,12 +94,12 @@ export default {
   width: 100%;
   height: 200px;
   border-radius: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
   color: white;
-  text-align: center;
+  text-align: left;
   padding: 1rem;
 }
 

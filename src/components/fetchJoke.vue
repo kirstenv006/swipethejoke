@@ -3,16 +3,16 @@
   <div class="jokestijl" draggable="true" v-on:dragstart="dragStart" v-on:dragend="dragEnd">
     
     <!-- Toon een foutmelding als er iets misgaat -->
-    <div v-if="error">❌ Fout: {{ error }}</div>
+    <div v-if="error">❌ Error: {{ error }}</div>
 
     <!-- Toon de joke als alles goed gaat -->
     <p v-else-if="joke">{{ joke }}</p>
 
     <!-- Laadindicator als er nog geen data is -->
-    <p v-else>⏳ Laden...</p>
+    <p v-else>⏳ Loading></p>
   </div>
       <!-- Knop om een nieuwe grap op te halen -->
-      <button class="fetchJoke" @click="fetchJoke">Nieuwe grap ophalen</button>
+      <button class="fetchJoke" @click="fetchJoke">Fetch new joke</button>
 
       <button class="button" @click="liked">
   <img alt="Like" src="@/assets/like.png" class="leuk" />
@@ -98,8 +98,8 @@ export default {
 .fetchJoke {
   margin-bottom: 0;
   padding: 8px 12px;
-  background-color: #007bff;
-  color: white;
+  background-color: #f5b318;
+  color: black;
   border: none;
   cursor: pointer;
   border-radius: 5px;
@@ -110,7 +110,7 @@ export default {
   font-size: 15px;
 }
 .fetchJoke:hover {
-  background-color: #0056b3;
+  background-color: #ed9805;
 }
 
 h1 {
@@ -126,15 +126,15 @@ p {
   padding: 1rem;
   width: auto; 
   text-align: center; 
-  color: white;
+  color: black;
 }
 
 .jokestijl {
-  background-color: green;
+  background-color: #bdb6ac;
   width: 700px; 
   height: 400px; 
   border-radius: 15px;
-  box-shadow: 0 4px 8px rgba(0,0,0,1); 
+  box-shadow: 0 4px 8px rgba(0,0,0,0.5); 
   display: flex;
   justify-content: center;
   align-items: center;
