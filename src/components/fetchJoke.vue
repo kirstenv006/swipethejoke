@@ -12,7 +12,14 @@
     <p v-else>⏳ Laden...</p>
   </div>
       <!-- Knop om een nieuwe grap op te halen -->
-      <button  @click="fetchJoke">Nieuwe grap ophalen</button>
+      <button class="fetchJoke" @click="fetchJoke">Nieuwe grap ophalen</button>
+
+      <button class="button" @click="liked">
+  <img alt="Like" src="@/assets/like.png" class="leuk" />
+</button>
+<button class="button" @click="dislike">
+  <img alt="dislike" src="@/assets/delete.png" class="nietleuk" />
+</button>
 </template>
 
 <script>
@@ -30,58 +37,65 @@ export default {
   mounted() {
     this.fetchJoke();
   },
-  methods: {
-    dragStart(event) {
-      this.startX = event.clientX; // Beginpositie opslaan
-    },
-    saveToLocalStorage(joke) {
-      const storedJokes = JSON.parse(localStorage.getItem('jokes')) || [];
-      storedJokes.push(joke);
-      localStorage.setItem('jokes', JSON.stringify(storedJokes));
-    },
-    dragEnd(event) {
+    methods: {
+  dragStart(event) {
+    this.startX = event.clientX;
+  },
+  dragEnd(event) {
+    this.currentX = event.clientX;
 
-      // Eindpositie opslaan
-      this.currentX = event.clientX;
-      
-      // Swipe naar rechts
-      if (this.currentX > this.startX) {
-        this.saveToLocalStorage(this.joke);  
-        this.fetchJoke();
-      } 
-      
-      // Swipe naar links
-      if (this.currentX < this.startX) {
-        this.fetchJoke();
-      }
-    },
-    async fetchJoke() {
-      try {
-        this.error = null; // Reset de foutmelding
-        this.joke = null; // Reset de joke terwijl er wordt geladen
-
-        const response = await fetch("https://icanhazdadjoke.com/", {
-          headers: {
-            "Accept": "application/json" 
-          }
-        });
-
-        if (!response.ok) {
-          throw new Error(`HTTP-fout! Status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        this.joke = data.joke;
-      } catch (error) {
-        this.error = error.message;
-      }
+    if (this.currentX > this.startX) {
+      this.like();
+    } 
+    if (this.currentX < this.startX) {
+      this.dislike();
     }
+  },
+  like() {
+    this.saveToLocalStorage(this.joke);
+    this.fetchJoke();
+  },
+  dislike() {
+    this.fetchJoke();
+  },
+  saveToLocalStorage(joke) {
+    const storedJokes = JSON.parse(localStorage.getItem('jokes')) || [];
+    storedJokes.push(joke);
+    localStorage.setItem('jokes', JSON.stringify(storedJokes));
+  },
+  async fetchJoke() {
+    try {
+      this.error = null;
+      this.joke = null;
+
+      const response = await fetch("https://icanhazdadjoke.com/", {
+        headers: {
+          "Accept": "application/json"
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP-fout! Status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      this.joke = data.joke;
+    } catch (error) {
+      this.error = error.message;
+    }
+  },
+  liked() {
+    this.like(); // like = swipe naar rechts
+  },
+  disliked() {
+    this.dislike(); // dislike = swipe naar links
   }
+}
 };
 </script>
 
 <style scoped>
-button {
+.fetchJoke {
   margin-bottom: 0;
   padding: 8px 12px;
   background-color: #007bff;
@@ -95,7 +109,7 @@ button {
   transform: translateX(-50%); 
   font-size: 15px;
 }
-button:hover {
+.fetchJoke:hover {
   background-color: #0056b3;
 }
 
@@ -126,4 +140,30 @@ p {
   align-items: center;
 }
 
+.leuk {
+  width: 100px;
+  height: 100px;
+  cursor: pointer; 
+  position: absolute;
+  bottom: 20%; 
+  right: 15%; 
+}
+
+.nietleuk {
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+  position: absolute;
+  bottom: 20%; 
+  left: 15%; 
+}
+
+.button{
+  background: transparent; 
+  border: none; 
+  color: transparent; 
+  width: auto; 
+  height: auto; 
+  cursor: default; 
+}
 </style>
