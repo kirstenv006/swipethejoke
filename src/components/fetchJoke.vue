@@ -1,17 +1,22 @@
 <template>
   <h1>Random Joke</h1>
-  <div class="jokestijl" draggable="true" v-on:dragstart="dragStart" v-on:dragend="dragEnd">
+      <div
+      class="jokestijl"
+      :class="{
+        'swipe-left': swipeDirection === 'left',
+        'swipe-right': swipeDirection === 'right',
+        'bg-left': swipeDirection === 'left',
+        'bg-right': swipeDirection === 'right'
+      }"
+      draggable="true"
+      v-on:dragstart="dragStart"
+      v-on:dragend="dragEnd"
+    >
     
-    <!-- Toon een foutmelding als er iets misgaat -->
     <div v-if="error">❌ Error: {{ error }}</div>
-
-    <!-- Toon de joke als alles goed gaat -->
     <p v-else-if="joke">{{ joke }}</p>
-
-    <!-- Laadindicator als er nog geen data is -->
     <p v-else>⏳ Loading></p>
   </div>
-      <!-- Knop om een nieuwe grap op te halen -->
       <button class="fetchJoke" @click="fetchJoke">Fetch new joke</button>
 
       <button class="button" @click="liked">
@@ -33,6 +38,7 @@ export default {
       startX: 0,
       currentX: 0,
       lastSwipeChoice: "",
+      swipeDirection: null
     };
   },
   mounted() {
@@ -46,10 +52,22 @@ export default {
     this.currentX = event.clientX;
 
     if (this.currentX > this.startX) {
-      this.like();
+      this.swipeDirection = 'right';
+        setTimeout(() => {
+          this.like();
+          this.swipeDirection = null;
+        }, 300);
     } 
     if (this.currentX < this.startX) {
       this.dislike();
+      this.swipeDirection = 'left';
+        setTimeout(() => {
+          this.dislike();
+          this.swipeDirection = null;
+        }, 300);
+    }
+    else{
+      this.swipeDirection = null;
     }
   },
   like() {
@@ -86,10 +104,18 @@ export default {
     }
   },
   liked() {
-    this.like(); // like = swipe naar rechts
+    this.swipeDirection = 'right';
+      setTimeout(() => {
+        this.like();
+        this.swipeDirection = null;
+      }, 300);
   },
   disliked() {
-    this.dislike(); // dislike = swipe naar links
+    this.swipeDirection = 'left';
+      setTimeout(() => {
+        this.dislike();
+        this.swipeDirection = null;
+      }, 300);
   }
 }
 };
@@ -139,6 +165,34 @@ p {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 1rem auto;
+  transition: background-color 0.3s ease;
+}
+
+.swipe-left {
+  animation: swipeLeft 0.3s ease forwards;
+}
+.swipe-right {
+  animation: swipeRight 0.3s ease forwards;
+}
+.bg-left {
+  background-color: #e74c3c !important;
+}
+.bg-right {
+  background-color: #2ecc71 !important;
+}
+
+@keyframes swipeLeft {
+  to {
+    transform: translateX(-150%) rotate(-10deg);
+    opacity: 0;
+  }
+}
+@keyframes swipeRight {
+  to {
+    transform: translateX(150%) rotate(10deg);
+    opacity: 0;
+  }
 }
 
 .leuk {
