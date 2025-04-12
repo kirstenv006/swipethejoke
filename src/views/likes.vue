@@ -38,13 +38,13 @@ export default {
       const removedLike = this.likes[index]; 
       this.likes.splice(index, 1); 
       localStorage.setItem("jokes", JSON.stringify(this.likes)); 
-      this.showActionMessage(`Grap verwijderd: "${removedLike}"`); 
+      this.showActionMessage(`Joke deleted: "${removedLike}"`); 
     },
     
     async copyToClipboard(like) {
       try {
         await navigator.clipboard.writeText(like); 
-        this.showActionMessage('Tekst gekopieerd!'); 
+        this.showActionMessage('Text copied to clipboard!'); 
       } catch (error) {
         console.error('error by coping', error); 
       }
