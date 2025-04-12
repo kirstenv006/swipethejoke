@@ -161,10 +161,11 @@ p {
 }
 
 .swipe-left {
-  animation: swipeLeft 0.3s ease forwards;
+  animation: swipeLeft 1s ease-in-out forwards;
 }
 .swipe-right {
-  animation: swipeRight 0.3s ease forwards;
+  animation: swipeRight 1s ease-in-out forwards;
+
 }
 .bg-left {
   background-color: #e74c3c !important;
@@ -175,13 +176,13 @@ p {
 
 @keyframes swipeLeft {
   to {
-    transform: translateX(-150%) rotate(-10deg);
+    transform: translateX(-450%) rotate(-45deg);
     opacity: 0;
   }
 }
 @keyframes swipeRight {
   to {
-    transform: translateX(150%) rotate(10deg);
+    transform: translateX(450%) rotate(45deg);
     opacity: 0;
   }
 }
