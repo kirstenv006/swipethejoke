@@ -1,6 +1,9 @@
+
+
 <template>
-  <h1>Random Joke</h1>
-      <div
+  <div>
+    <h1>Random Joke</h1>
+    <div
       class="jokestijl"
       :class="{
         'swipe-left': swipeDirection === 'left',
@@ -12,24 +15,24 @@
       v-on:dragstart="dragStart"
       v-on:dragend="dragEnd"
     >
-    
-    <div v-if="error">❌ Error: {{ error }}</div>
-    <p v-else-if="joke">{{ joke }}</p>
-    <p v-else>⏳ Loading></p>
-  </div>
-      <button class="fetchJoke" @click="fetchJoke">Fetch new joke</button>
+      <div v-if="error">❌ Error: {{ error }}</div>
+      <p v-else-if="joke">{{ joke }}</p>
+      <p v-else>⏳ Loading...</p>
+    </div>
 
-      <button class="button" @click="liked">
-  <img alt="Like" src="@/assets/like.png" class="leuk" />
-</button>
-<button class="button" @click="dislike">
-  <img alt="dislike" src="@/assets/delete.png" class="nietleuk" />
-</button>
+    <!-- Knoppen -->
+    <button class="fetchJoke" @click="fetchJoke">Fetch new joke</button>
+
+    <button class="button" @click="liked">
+      <img alt="Like" src="@/assets/like.png" class="leuk" />
+    </button>
+    <button class="button" @click="disliked">
+      <img alt="dislike" src="@/assets/delete.png" class="nietleuk" />
+    </button>
+  </div>
 </template>
 
 <script>
-
-
 export default {
   data() {
     return {
@@ -37,87 +40,79 @@ export default {
       error: null,
       startX: 0,
       currentX: 0,
-      lastSwipeChoice: "",
       swipeDirection: null
     };
   },
   mounted() {
     this.fetchJoke();
   },
-    methods: {
-  dragStart(event) {
-    this.startX = event.clientX;
-  },
-  dragEnd(event) {
-    this.currentX = event.clientX;
+  methods: {
+    dragStart(event) {
+      this.startX = event.clientX;
+    },
+    dragEnd(event) {
+      this.currentX = event.clientX;
 
-    if (this.currentX > this.startX) {
-      this.swipeDirection = 'right';
+      if (this.currentX > this.startX) {
+        this.swipeDirection = 'right';
         setTimeout(() => {
           this.like();
           this.swipeDirection = null;
         }, 300);
-    } 
-    if (this.currentX < this.startX) {
-      this.dislike();
-      this.swipeDirection = 'left';
+      } else if (this.currentX < this.startX) {
+        this.swipeDirection = 'left';
         setTimeout(() => {
           this.dislike();
           this.swipeDirection = null;
         }, 300);
-    }
-    else{
-      this.swipeDirection = null;
-    }
-  },
-  like() {
-    this.saveToLocalStorage(this.joke);
-    this.fetchJoke();
-  },
-  dislike() {
-    this.fetchJoke();
-  },
-  saveToLocalStorage(joke) {
-    const storedJokes = JSON.parse(localStorage.getItem('jokes')) || [];
-    storedJokes.push(joke);
-    localStorage.setItem('jokes', JSON.stringify(storedJokes));
-  },
-  async fetchJoke() {
-    try {
-      this.error = null;
-      this.joke = null;
-
-      const response = await fetch("https://icanhazdadjoke.com/", {
-        headers: {
-          "Accept": "application/json"
-        }
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP-fout! Status: ${response.status}`);
       }
+    },
+    like() {
+      this.saveToLocalStorage(this.joke);
+      this.fetchJoke();
+    },
+    dislike() {
+      this.fetchJoke();
+    },
+    saveToLocalStorage(joke) {
+      const storedJokes = JSON.parse(localStorage.getItem("jokes")) || [];
+      storedJokes.push(joke);
+      localStorage.setItem("jokes", JSON.stringify(storedJokes));
+    },
+    async fetchJoke() {
+      try {
+        this.error = null;
+        this.joke = null;
 
-      const data = await response.json();
-      this.joke = data.joke;
-    } catch (error) {
-      this.error = error.message;
-    }
-  },
-  liked() {
-    this.swipeDirection = 'right';
+        const response = await fetch("https://icanhazdadjoke.com/", {
+          headers: { Accept: "application/json" }
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP-fout! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        this.joke = data.joke;
+      } catch (error) {
+        this.error = error.message;
+      }
+    },
+    liked() {
+      this.swipeDirection = 'right';
       setTimeout(() => {
         this.like();
         this.swipeDirection = null;
       }, 300);
-  },
-  disliked() {
-    this.swipeDirection = 'left';
+    },
+    disliked() {
+      this.swipeDirection = 'left';
       setTimeout(() => {
         this.dislike();
         this.swipeDirection = null;
       }, 300);
+    }
   }
-}
 };
 </script>
 
@@ -131,9 +126,9 @@ export default {
   cursor: pointer;
   border-radius: 5px;
   position: fixed;
-  bottom: 50px; 
-  left: 50%; 
-  transform: translateX(-50%); 
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
   font-size: 15px;
 }
 .fetchJoke:hover {
@@ -141,27 +136,23 @@ export default {
 }
 
 h1 {
-  top: 100px;
-  top: 100px; 
-  left: 0; 
-  width: 100%; 
   padding: 1rem;
+  text-align: center;
 }
 
 p {
   font-size: 18px;
   padding: 1rem;
-  width: auto; 
-  text-align: center; 
+  text-align: center;
   color: black;
 }
 
 .jokestijl {
   background-color: #bdb6ac;
-  width: 700px; 
-  height: 400px; 
+  width: 700px;
+  height: 400px;
   border-radius: 15px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.5); 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -198,10 +189,10 @@ p {
 .leuk {
   width: 100px;
   height: 100px;
-  cursor: pointer; 
+  cursor: pointer;
   position: absolute;
-  bottom: 20%; 
-  right: 15%; 
+  bottom: 20%;
+  right: 15%;
 }
 
 .nietleuk {
@@ -209,16 +200,14 @@ p {
   height: 100px;
   cursor: pointer;
   position: absolute;
-  bottom: 20%; 
-  left: 15%; 
+  bottom: 20%;
+  left: 15%;
 }
 
-.button{
-  background: transparent; 
-  border: none; 
-  color: transparent; 
-  width: auto; 
-  height: auto; 
-  cursor: default; 
+.button {
+  background: transparent;
+  border: none;
+  width: auto;
+  height: auto;
 }
 </style>
