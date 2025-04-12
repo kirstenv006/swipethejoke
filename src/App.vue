@@ -29,10 +29,11 @@ nav {
   font-size: 18px;
   text-align: center;
   margin-top: 2rem;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 nav a.router-link-exact-active {
-  color: var(--color-text);
+  color: #bdb6ac;
 }
 
 nav a.router-link-exact-active:hover {
@@ -42,7 +43,7 @@ nav a.router-link-exact-active:hover {
 nav a {
   display: inline-block;
   padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
+  border-left: 2px solid #bdb6ac;
 }
 
 nav a:first-of-type {
@@ -58,7 +59,7 @@ nav a:first-of-type {
   header .wrapper {
     flex-wrap: wrap;
     color: black;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: Arial, Helvetica, sans-serif;
   }
 
   nav {
