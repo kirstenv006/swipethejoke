@@ -1,13 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import joke from '../views/Joke.vue'
+import fetchJoke from '../views/Joke.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/joke',
-      name: 'joke',
-      component: joke,
+      path: '/',
+      name: 'home',
+      component: fetchJoke,
     },
     {
       path: '/likes',
