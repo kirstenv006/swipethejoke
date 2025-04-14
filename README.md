@@ -36,7 +36,7 @@ npm run build
 
 ## Gebruikte technologieën
 
-Framework: Vue.js (geïnteresseerd in mijn framework keuze? Dit kan je lezen in mijn portfolio!)
+Framework: Vue.js (geïnteresseerd in mijn framework keuze? Dit kan je lezen in mijn portfolio!) <br>
 API: https://icanhazdadjoke.com/
 
 ## Veel Swipe plezier!
