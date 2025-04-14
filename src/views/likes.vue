@@ -5,6 +5,7 @@
     <div class="cards-container">
       <div class="jokestijlklein" v-for="(like, index) in likes" :key="index">
         <p>{{ like }}</p>
+        <!-- knoppen verwijderen en kopiëren -->
         <button class="button" @click="verwijderLike(index)">
           <img alt="prullenbak" src="@/assets/bin.png" class="bin" />
         </button>
@@ -13,7 +14,7 @@
         </button>
       </div>
     </div>
-
+<!-- melding na actie -->
     <div v-if="isActionTaken" class="copy-message">
       {{ actionMessage }}
     </div>
@@ -30,17 +31,19 @@ export default {
     };
   },
   mounted() {
+    // Haal de geliket grappen op uit localStorage
     const grapjes = JSON.parse(localStorage.getItem("jokes")) || [];
     this.likes = grapjes;
   },
   methods: {
+    // Verwijder de grap uit de lijst van likes
     verwijderLike(index) {
       const removedLike = this.likes[index]; 
       this.likes.splice(index, 1); 
       localStorage.setItem("jokes", JSON.stringify(this.likes)); 
       this.showActionMessage(`Joke deleted: "${removedLike}"`); 
     },
-    
+    // Kopieer de grap naar het klembord
     async copyToClipboard(like) {
       try {
         await navigator.clipboard.writeText(like); 
@@ -50,7 +53,7 @@ export default {
       }
     },
 
-
+// Toon een melding na een actie
     showActionMessage(message) {
       this.actionMessage = message; 
       this.isActionTaken = true; 
@@ -64,6 +67,7 @@ export default {
 </script>
 
 <style>
+/* knoppen stijl */
 .button {
   background-color: transparent;
   border: none;
@@ -80,6 +84,7 @@ export default {
   height: 30px;
 }
 
+/* kaartjes voor geliket grappen */
 .cards-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -117,7 +122,7 @@ h1 {
   margin-bottom: 2rem;
 }
 
-
+/* melding van de actie */
 .copy-message {
   position: fixed;
   bottom: 20px;

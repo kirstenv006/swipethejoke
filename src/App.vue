@@ -1,4 +1,5 @@
 <script setup>
+// router map ophalen
 import { RouterLink, RouterView } from 'vue-router'
 
 </script>
@@ -8,6 +9,7 @@ import { RouterLink, RouterView } from 'vue-router'
 
     <div class="wrapper">
       <nav>
+        <!-- Pagina's ophalen en tonen in navigatie -->
         <RouterLink to="/">Swipe</RouterLink>
         <RouterLink to="/likes">Likes</RouterLink>
       </nav>
@@ -23,7 +25,7 @@ header {
   max-height: 100vh;
   margin-bottom: 2rem;
 }
-
+/* navigatie vormgeving */
 nav {
   width: 100%;
   font-size: 18px;

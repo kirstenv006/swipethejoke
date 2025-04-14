@@ -3,6 +3,7 @@
 <template>
   <div>
     <h1>Random Joke</h1>
+<!-- Kaart voor de grap -->
     <div
       class="jokestijl"
       :class="{
@@ -15,6 +16,7 @@
       v-on:dragstart="dragStart"
       v-on:dragend="dragEnd"
     >
+    <!-- Meldingen in de grappen -->
       <div v-if="error">❌ Error: {{ error }}</div>
       <p v-else-if="joke">{{ joke }}</p>
       <p v-else>⏳ Loading...</p>
@@ -43,6 +45,7 @@ export default {
       swipeDirection: null
     };
   },
+   // Grap ophalen
   mounted() {
     this.fetchJoke();
   },
@@ -50,7 +53,10 @@ export default {
     dragStart(event) {
       this.startX = event.clientX;
     },
+
+    // animatie voor de swipe
     dragEnd(event) {
+      
       this.currentX = event.clientX;
 
       if (this.currentX > this.startX) {
@@ -67,6 +73,8 @@ export default {
         }, 300);
       }
     },
+    // Grap opslaan in localStorage
+    // en nieuwe grap ophalen
     like() {
       this.saveToLocalStorage(this.joke);
       this.fetchJoke();
@@ -98,6 +106,8 @@ export default {
         this.error = error.message;
       }
     },
+
+    // animatie voor de knoppen
     liked() {
       this.swipeDirection = 'right';
       setTimeout(() => {
@@ -117,23 +127,7 @@ export default {
 </script>
 
 <style scoped>
-.fetchJoke {
-  margin-bottom: 0;
-  padding: 8px 12px;
-  background-color: #f5b318;
-  color: black;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-  position: fixed;
-  bottom: 50px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 15px;
-}
-.fetchJoke:hover {
-  background-color: #ed9805;
-}
+
 
 h1 {
   padding: 1rem;
@@ -147,6 +141,7 @@ p {
   color: black;
 }
 
+/* Kaart opmaak */
 .jokestijl {
   background-color: #bdb6ac;
   width: 700px;
@@ -160,6 +155,7 @@ p {
   transition: background-color 0.3s ease;
 }
 
+/* Animatie opmaak */
 .swipe-left {
   animation: swipeLeft 1s ease-in-out forwards;
 }
@@ -187,6 +183,7 @@ p {
   }
 }
 
+/* knoppen */
 .leuk {
   width: 100px;
   height: 100px;
@@ -210,5 +207,23 @@ p {
   border: none;
   width: auto;
   height: auto;
+}
+
+.fetchJoke {
+  margin-bottom: 0;
+  padding: 8px 12px;
+  background-color: #f5b318;
+  color: black;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  position: fixed;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 15px;
+}
+.fetchJoke:hover {
+  background-color: #ed9805;
 }
 </style>
