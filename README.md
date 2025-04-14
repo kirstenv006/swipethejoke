@@ -2,16 +2,11 @@
 
 Beoordeel de leukste dadjokes door ze te swipen. Het Tinder voor dad jokes.
 
-## Recommended IDE Setup
+## Hoe kan je het installeren?
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
 Om de grappen te kunnen gaan swipen moet je eerst de code downloaden. Navigeer naar de code in de Terminal en je bent ready om deze stappen te volgen.
 
-## Stap 1: Installatie
+### Stap 1: Installatie
 
 Om Vue te installeren schrijf je in de Terminal.
 
