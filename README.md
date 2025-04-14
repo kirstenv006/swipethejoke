@@ -1,6 +1,6 @@
 # SwipetheJoke
 
-This template should help get you started developing with Vue 3 in Vite.
+Beoordeel de leukste dadjokes door ze te swipen. Het Tinder voor dad jokes.
 
 ## Recommended IDE Setup
 
