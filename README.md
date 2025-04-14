@@ -2,6 +2,10 @@
 
 Beoordeel de leukste dadjokes door ze te swipen. Het Tinder voor dad jokes.
 
+## Doelgroep
+
+Mijn doelgroep is studenten
+
 ## Hoe kan je het installeren?
 
 Om de grappen te kunnen gaan swipen moet je eerst de code downloaden. Navigeer naar de code in de Terminal en je bent ready om deze stappen te volgen.
@@ -29,6 +33,11 @@ Wil je de code live zetten? Dat kan met behulp van npm run build.
 ```sh
 npm run build
 ```
+
+## Gebruikte technologieën
+
+Framework: Vue.js (geïnteresseerd in mijn framework keuze? Dit kan je lezen in mijn portfolio!)
+API: https://icanhazdadjoke.com/
 
 ## Veel Swipe plezier!
 
