@@ -29,3 +29,7 @@ Wil je de code live zetten? Dat kan met behulp van npm run build.
 ```sh
 npm run build
 ```
+
+## Veel Swipe plezier!
+
+Ohja, hardop lachen mag!
